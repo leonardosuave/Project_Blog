@@ -1,0 +1,47 @@
+<%- include('includes/header') %>
+<%- include('includes/nav') %>
+<body>
+    
+    <div class="container">
+
+        <%- include('includes/messages') %>
+
+        <div class="jumbotron">
+            <% if(user) { %>
+                <h1 class="display-4">Seja bem vindo <%= user.name %></h1>
+            <% } else { %>
+                <h1 class="display-4">Seja bem vindo</h1>
+            <% } %>
+            <p class="lead">Este é um blog criado para praticar os conceitos de programação.</p>
+            <hr class="my-4">
+            <p>Clique aqui para saber mais .</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </div>
+        <hr>
+
+        <h2 style="text-align:center;">Novos artigos</h2>
+        
+        <!--Para inserir os artigos na pag-->
+        <% articles.forEach(article => { %>
+            <div class="card">
+                <div class="card-header">
+                    <h3><%= article.title %></h3>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-success" href="/<%= article.slug %>">Ler artigo</a>
+                </div>
+                <br>
+            </div>
+        <% }) %>
+
+        <!--Adicionar botão de proxima página (POSSUI BUG NA FUNCIONALIDADE )-->
+        <div class="row">
+            <div class="col col-12">
+                <a style="float: right" href="/article/page/1">Todos os Artigos</a>
+            </div>
+            <hr>
+        </div>
+        <hr>
+    </div>
+</body>
+<%- include('includes/footer') %>

@@ -1,0 +1,38 @@
+<%- include('../../includes/header') %>
+<%- include('../../includes/nav') %>
+
+<div class="container">
+<br>
+    <div class="card">
+        <div class="card-header">
+            <h2>Novo Artigo</h2>
+        </div>
+        <div class="card-body">
+            <form action="/articles/save" method="POST">
+
+                <%- include('../../includes/messages') %>
+
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                <input class="form-control" type="text" name="article" placeholder="Digita o título do artigo"><br>
+                <textarea class="form-control" placeholder="Escreva o artigo aqui"  name="bodyArticle" id="article" cols="30" rows="10"></textarea><br>
+                <label>Categoria</label>
+
+                <select name="category" class="form-control">
+
+                    <% categories.forEach((category) => { %>
+                        <option value="<%= category.id %>"><%= category.title %></option>
+                    <% }) %>
+
+                </select>
+
+                <button class="btn btn-success">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../../includes/footer') %>
+
+<script src="/tinymce/tinymce.min.js"></script>
+<script src="/tinymce/tinymce.js"></script>

@@ -1,0 +1,44 @@
+<%- include('../../includes/header') %>
+<%- include('../../includes/nav') %>
+
+<div class="container">
+<br>
+    <div class="card">
+        <div class="card-header">
+            <h2>Editar Artigo</h2>
+        </div>
+        <div class="card-body">
+            <form action="/admin/article/update/<%= loadArticle.id %>" method="POST">
+
+                <%- include('../../includes/messages') %>
+
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                <input class="form-control" type="text" name="article" placeholder="Digita o título do artigo" value="<%= loadArticle.title %>"><br>
+                <textarea class="form-control" placeholder="Escreva o artigo aqui"  name="bodyArticle" id="article" cols="30" rows="10"><%- loadArticle.body %></textarea><br>
+                <label>Categoria</label>
+
+                <select name="category" class="form-control">
+
+                    <% categories.forEach((category) => { %>
+
+                        <% if(category.id === loadArticle.categoryId) { %>
+                            <option value="<%= category.id %>" selected><%= category.title %></option>
+                        <% } else { %>
+                            <option value="<%= category.id %>"><%= category.title %></option>
+                        <% } %>
+                        
+                    <% }) %>
+
+                </select>
+
+                <button class="btn btn-success">Atualizar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../../includes/footer') %>
+
+<script src="/tinymce/tinymce.min.js"></script>
+<script src="/tinymce/tinymce.js"></script>

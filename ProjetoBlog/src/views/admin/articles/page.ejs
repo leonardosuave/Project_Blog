@@ -1,0 +1,39 @@
+<%- include('../../includes/header') %>
+<%- include('../../includes/nav') %>
+<body>
+    <!--Visualizar na page os artigos e opção de ler-->
+    <div class="container">
+        <hr>
+        <% result.articlePage.rows.forEach(article => { %>
+            <div class="card">
+                <div class="card-header">
+                    <h2><%= article.title %></h2>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-success" href="/<%= article.slug %>">Ler artigo</a>
+                </div>
+                <br>
+            </div>
+        <% }) %>
+
+        <!--Adicionar botão de páginas-->
+        <div class="row">
+            <div class="col col-12">
+
+                <!--Voltar página-->
+                <% if(result.page > 1 || !result.next) { %>
+                    <a style="float: left" href="/article/page/<%= result.page - 1 %>">Voltar página</a>
+                <% } %>
+
+                <!--Proxima página-->
+                <% if(result.next) { %>
+                    <a style="float: right" href="/article/page/<%= result.page + 1 %>">Proxima página</a>
+                <% } %> 
+            </div>
+            <hr>
+        </div>
+        <hr>
+
+    </div>
+</body>
+<%- include('../../includes/footer') %>

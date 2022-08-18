@@ -1,0 +1,43 @@
+<%- include('../../includes/header') %>
+<%- include('../../includes/nav') %>
+
+<div class="container">
+    <hr>
+    <h2>Categorias</h2>
+    <a href="/admin/categories/new" class="btn btn-success">Criar nova categoria</a>
+    <hr>
+    <%- include('../../includes/messages') %>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Slug</th>
+                <th>ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% categories.forEach(category => { %>
+                <tr>
+                    <th><%= category.id %></th>
+                    <th><%= category.title %></th>
+                    <th><%= category.slug %></th>
+                    <th>
+
+                        <a class="btn btn-primary" href="/articles/<%= category.id %>/page/1">Ver artigos</a>
+
+                        <a class="btn btn-warning" href="/categories/edit/<%= category.id %>">Editar</a>
+                        
+                        <form action="/categories/delete/<%= category.id %>" style="display: inline;" onclick="confirmDelete(this)" > <!--this refere-se ao elemento form-->
+                            <button class="btn btn-danger btnDel"> Deletar</button>
+                        </form>
+                    </th>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<script src="/frontend/delete.js"></script>
+
+<%- include('../../includes/footer') %>
